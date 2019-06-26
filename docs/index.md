@@ -65,6 +65,8 @@
 ## 示例文档1
 > 这只是一个示例文档
 ```
+3. 然后用服务器（比如nginx）把站点挂起来就行了，
 
-3. 常用md语法在本站最下面的`md示例`链接中有说明，更详细语法请自行学习。
-4. 本站md解析使用[markedjs](https://github.com/markedjs/marked)，语法高亮使用[highlightjs](https://highlightjs.org/)
+----
+* 常用md语法在本站最下面的`md示例`链接中有说明，更详细语法请自行学习。
+* 本站md解析使用[markedjs](https://github.com/markedjs/marked)，语法高亮使用[highlightjs](https://highlightjs.org/)
