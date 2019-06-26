@@ -81,7 +81,7 @@ window.app = (function () {
                 location.hash = "";
                 success && success();
             }, function (e) {
-                window.app.container.html(e.responseText);
+                window.app.container.html(e.responseText || "<pre>Cannot GET " + source + "</pre>");
             });
         } catch (ex) {
             window.app.container.html(ex);
@@ -102,8 +102,10 @@ window.app = (function () {
         window.app.copyrightEle = $(window.app.copyrightSelector);
         window.app.slider = $(window.app.slideSelector);
 
-        window.app.slider.delegate("span.toggle", "click", function (e) {
-            var ele = $(this);
+        var toggle = function (ele) {
+            if(ele.length===0){
+                return;
+            }
             var li = ele.closest("li.toggle");
             var ul = li.find(">ul");
             if (ul.is(":visible")) {
@@ -115,7 +117,14 @@ window.app = (function () {
                 ul.slideDown(100);
                 ele.html("-");
             }
-        })
+        }
+
+        window.app.slider.delegate("span.toggle", "click", function (e) {
+            toggle($(this))
+        });
+        window.app.slider.delegate("li.toggle >a:not(.menulink)", "click", function (e) {
+            toggle($(this).closest("li").find(">span.toggle"))
+        });
 
         window.app.slider.delegate("li a.menulink", "click", function () {
             var link = $(this);
@@ -367,12 +376,13 @@ window.app = (function () {
                 window.app.slider.html('<h3>目录</h3>');
                 if (data.menus && data.menus.length) {
                     setMenus(window.app.slider, data.menus, null, false);
-                    window.app.container.html("<blockquote><p>请从左侧目录选择要查看的接口说明。</p></blockquote>");
+                    window.app.container.html("<pre>请从左侧目录选择要查看的接口说明。</pre>");
                     var first = window.app.slider.find("li>a.menulink:eq(0)");
+                    first.closest("ul.toggle").closest("li.toggle").find(">span.toggle").click();
                     first.length && first.trigger("click");
                 } else {
                     window.app.slider.append("未定义目录");
-                    window.app.container.html("<blockquote><p>未定义目录配置。</p></blockquote>");
+                    window.app.container.html("<pre>未定义目录配置。</pre>");
                 }
             }, function (e) {
                 window.app.container.html(e.responseText);
