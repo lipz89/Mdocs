@@ -1,0 +1,54 @@
+{
+    "title": "接口定义",
+    "version": "1.0.0",
+    "author": "author",
+    "copyright": "©2019, company.",
+    "menus": [
+        {
+            "title": "首页",
+            "file": "docs/index.md"
+        },
+        {
+            "title": "分类1",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "子类1",
+                    "file": "docs/type1/test1.md"
+                },
+                {
+                    "title": "子类2",
+                    "file": "docs/type1/test2.md"
+                }
+            ]
+        },
+        {
+            "title": "分类2",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "子类3",
+                    "file": "docs/type2/test3.md"
+                },
+                {
+                    "title": "子类4",
+                    "file": "docs/type2/test4.md"
+                }
+            ]
+        },
+        {
+            "title": "附录",
+            "listtype": "decimal",
+            "items": [
+                {
+                    "title": "数据字典",
+                    "file": "docs/appendix/dic.md"
+                },
+                {
+                    "title": "数据格式",
+                    "file": "docs/appendix/fmt.md"
+                }
+            ]
+        }
+    ]
+}

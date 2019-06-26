@@ -1,0 +1,117 @@
+div.document {
+    font-family: 'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif;
+    font-size: 17px;
+    width: 1000px;
+    margin: 30px auto 0 auto;
+    color: #3E4349;
+}
+
+div.slidebar {
+    width: 25%;
+    position: fixed;
+    left: 10px;
+}
+
+div.slidebar h3 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+div.slidebar ul {
+    margin: 3px 0 3px 10px;
+    padding: 0;
+    color: #000;
+    list-style: none;
+}
+
+div.slidebar ul li {
+    margin: 5px 0;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+div.slidebar ul li span.toggle {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    line-height: 11px;
+    text-align: center;
+}
+
+div.slidebar a {
+    color: #444;
+    text-decoration: none;
+    border-bottom: 1px dotted #999;
+}
+
+div.slidebar li.aH2 {
+    font-size: 16px;
+}
+
+div.slidebar li.aH3 {
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+div.slidebar li.aH4 {
+    font-size: 12px;
+    margin-left: 16px;
+}
+
+
+div.main {
+    width: 75%;
+    margin-left: 25%;
+}
+
+div.copyright {
+    clear: both;
+    margin: 20px auto 20px auto;
+    padding-top: 10px;
+    font-size: 14px;
+    color: #888;
+    text-align: center;
+}
+
+.table {
+    min-width: 50%;
+    width: auto !important;
+}
+
+
+div.navtop {
+    display: inline-block;
+    position: fixed;
+    right: 20px;
+    bottom: 2px;
+    cursor: pointer;
+}
+
+div.navtop .arrow {
+    border-width: 12px 25px;
+    border-color: transparent;
+    border-style: solid;
+    border-bottom-color: #ccc;
+}
+
+div.navtop .text {
+    display: none;
+    width: 48px;
+    border: 2px solid #ccc;
+    line-height: 36px;
+    text-align: center;
+    font-size: 18px;
+    color: #aaa;
+    background: #f8f8f8;
+}
+
+div.navtop:hover .text {
+    display: inline-block;
+}
+
+li>a.active {
+    background: #eee;
+}
