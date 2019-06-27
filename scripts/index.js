@@ -47,10 +47,14 @@ window.app = (function () {
     function setSlider() {
         var width = $("div.document").width();
         var allw = $(document).width();
-        var sliderWidth = width / 4;
+        var slideWidth = width / 4 - 10;
         var left = (allw - width) / 2;
-        $(".document>.slidebar").css("width", sliderWidth + "px");
+        $(".document>.slidebar").css("width", slideWidth + "px");
         $(".document>.slidebar").css("left", left + "px");
+        var height = document.body.clientHeight;
+        var top = window.app.slider.offset().top;
+        var slideHeight = height - top;
+        window.app.slider.css("max-height", slideHeight + "px");
     }
 
     function loadJs(src) {
@@ -89,6 +93,11 @@ window.app = (function () {
     }
 
     $(document).ready(function () {
+        window.app.titleEle = $(window.app.titleSelector);
+        window.app.container = $(window.app.containerSelector);
+        window.app.copyrightEle = $(window.app.copyrightSelector);
+        window.app.slider = $(window.app.slideSelector);
+
         setSlider();
         $(window).resize(setSlider);
 
@@ -96,14 +105,8 @@ window.app = (function () {
             $(document).scrollTop(0);
         });
 
-
-        window.app.titleEle = $(window.app.titleSelector);
-        window.app.container = $(window.app.containerSelector);
-        window.app.copyrightEle = $(window.app.copyrightSelector);
-        window.app.slider = $(window.app.slideSelector);
-
         var toggle = function (ele) {
-            if(ele.length===0){
+            if (ele.length === 0) {
                 return;
             }
             var li = ele.closest("li.toggle");
@@ -112,8 +115,8 @@ window.app = (function () {
                 ul.slideUp(100);
                 ele.html("+");
             } else {
-                li.closest("ul").find(">li.toggle>ul").slideUp(100);
-                li.closest("ul").find(">li.toggle>span.toggle").html("+");
+                // li.closest("ul").find(">li.toggle>ul").slideUp(100);
+                // li.closest("ul").find(">li.toggle>span.toggle").html("+");
                 ul.slideDown(100);
                 ele.html("-");
             }
@@ -122,8 +125,29 @@ window.app = (function () {
         window.app.slider.delegate("span.toggle", "click", function (e) {
             toggle($(this))
         });
-        window.app.slider.delegate("li.toggle >a:not(.menulink)", "click", function (e) {
+        window.app.slider.delegate("li.toggle>a:not(.menulink)", "click", function (e) {
             toggle($(this).closest("li").find(">span.toggle"))
+        });
+
+        $(".document>.slidebar").delegate(".menus>span.positioning", "click", function () {
+            var li = window.app.slider.find("li>a.active").closest("li");
+            var ul = li.closest("ul");
+            if (ul.is(":hidden")) {
+                li.closest("ul").slideDown(100);
+                li.closest("ul").closest("li.toggle").find(">span.toggle").html("-");
+            }
+            window.app.slider.find("li.toggle>ul.toggle").not(ul).slideUp(100);
+            window.app.slider.find("li.toggle>ul.toggle").not(ul).closest("li.toggle").find(">span.toggle").html("+");
+        });
+
+        $(".document>.slidebar").delegate(".menus>span.collect", "click", function () {
+            window.app.slider.find("li.toggle>ul").slideUp(100);
+            window.app.slider.find("li.toggle>span.toggle").html("+");
+        });
+
+        $(".document>.slidebar").delegate(".menus>span.expand", "click", function () {
+            window.app.slider.find("li.toggle>ul").slideDown(100);
+            window.app.slider.find("li.toggle>span.toggle").html("-");
         });
 
         window.app.slider.delegate("li a.menulink", "click", function () {
@@ -348,7 +372,7 @@ window.app = (function () {
     })
 
     return {
-        slideSelector: ".document>.slidebar",
+        slideSelector: ".document>.slidebar>.slidepnl",
         titleSelector: ".document>.main .maintitle",
         containerSelector: ".document>.main .maindoc",
         copyrightSelector: ".document>.copyright",
@@ -373,8 +397,8 @@ window.app = (function () {
                     document.title = "MD文档示例 - " + window.app.title
                 });
 
-                window.app.slider.html('<h3>目录</h3>');
                 if (data.menus && data.menus.length) {
+                    window.app.slider.empty();
                     setMenus(window.app.slider, data.menus, null, false);
                     window.app.container.html("<pre>请从左侧目录选择要查看的接口说明。</pre>");
                     var first = window.app.slider.find("li>a.menulink:eq(0)");
