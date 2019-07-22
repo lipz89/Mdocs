@@ -22,17 +22,17 @@ div.slidebar .slidepnl::-webkit-scrollbar {
 }
 
 div.slidebar .slidepnl::-webkit-scrollbar-track {
-    background-color: #eee;
+    background-color: #ddd;
 }
 
 div.slidebar .slidepnl::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #bbb;
 }
 
 div.slidebar .menus {
     font-size: 24px;
     padding: 10px 5px;
-    border-right: 2px solid #ccc;
+    border-right: 2px solid #ddd;
 }
 
 div.slidebar .menus>span {
@@ -41,13 +41,13 @@ div.slidebar .menus>span {
     height: 12px;
     margin-right: 5px;
     cursor: pointer;
-    color: #666;
+    color: #0593d3;
     font-size: 16px;
     line-height: 15px;
 }
 
 div.slidebar .menus>span.positioning {
-    border: 1px solid #666;
+    border: 1px solid #0593d3;
     border-radius: 50%;
     text-align: center;
 }
@@ -116,35 +116,49 @@ div.copyright {
     width: auto !important;
 }
 
-
-div.navtop {
-    display: inline-block;
+div.navmore {
+    display: block;
     position: fixed;
-    right: 20px;
-    bottom: 2px;
     cursor: pointer;
+    top: 200px;
+    right: 0px;
+    background: transparent;
+    color: #0464c4;
 }
 
-div.navtop .arrow {
-    border-width: 12px 25px;
-    border-color: transparent;
-    border-style: solid;
-    border-bottom-color: #ccc;
-}
-
-div.navtop .text {
+div.navmore div.right {
+    float: right;
     display: none;
-    width: 48px;
-    border: 2px solid #ccc;
-    line-height: 36px;
+    line-height: 35px;
     text-align: center;
     font-size: 18px;
-    color: #aaa;
-    background: #f8f8f8;
+    border: 1px double #999;
 }
 
-div.navtop:hover .text {
-    display: inline-block;
+div.navmore:hover div.right {
+    display: block;
+}
+
+div.navmore .arrow {
+    float: left;
+    height: 57px;
+    width: 12px;
+    word-break: break-all;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    border: 3px double #999;
+    background: greenyellow;
+}
+
+div.navmore div.right div {
+    border: none;
+    border-bottom: 1px solid #999;
+    height: 30px;
+}
+
+div.navmore div.right div:last-child {
+    border-bottom: none;
 }
 
 li>a.active {

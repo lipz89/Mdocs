@@ -68,10 +68,16 @@ window.app = (function () {
         loadJs(src);
     }
 
-    function loadmd(source, success) {
+    function loadmd(source, success, showmd = false) {
         try {
             $.get(source).then(function (md) {
-                window.app.container.html(marked(md));
+                var containText = md;
+                if (showmd) {
+                    containText = "<pre><code class=\"language-md hljs\">" + md + "</code></pre>";
+                } else {
+                    containText = marked(md);
+                }
+                window.app.container.html(containText);
 
                 var tableEls = document.getElementsByTagName('table');
                 for (var i = 0, ii = tableEls.length; i < ii; i++) {
@@ -101,9 +107,28 @@ window.app = (function () {
         setSlider();
         $(window).resize(setSlider);
 
-        $(document).find("div.navtop").click(function () {
+        $(document).find("div.navmore .top").click(function () {
             $(document).scrollTop(0);
         });
+        $(document).find("div.navmore .source").click(function () {
+            var link = window.app.slider.find("a.menulink.active");
+            if (link.length == 1) {
+                if (link.data("showsource")) {
+                    link.trigger("click");
+                } else {
+                    var url = link.data("source");
+                    loadmd(url, null, true);
+
+                    window.app.slider.find("li>a.active").closest("li").find(">ul").remove();
+                    window.app.slider.find("li>a.active").closest("li").find(">span.toggle").remove();
+
+                    window.app.titleEle.html(link.text() + " - 源码");
+                    document.title = link.text() + " - 源码 - " + window.app.title;
+                    link.data("showsource", true);
+                }
+            }
+        });
+
 
         var toggle = function (ele) {
             if (ele.length === 0) {
@@ -152,7 +177,7 @@ window.app = (function () {
 
         window.app.slider.delegate("li a.menulink", "click", function () {
             var link = $(this);
-            if (link.is(".active")) {
+            if (link.is(".active") && !link.data("showsource")) {
                 return;
             }
             var source = link.data("source");
@@ -181,7 +206,8 @@ window.app = (function () {
             link.addClass("active");
 
             window.app.titleEle.html(link.text());
-            document.title = link.text() + " - " + window.app.title
+            document.title = link.text() + " - " + window.app.title;
+            link.data("showsource", false)
         })
 
         loadLanguages('1c');
