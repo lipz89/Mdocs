@@ -135,3 +135,9 @@ listtype - 子目录列表样式，限定UL标签的list-style-type样式枚举�
 >3. 编辑`md`文件
 >4. 如果`md`文件中需要图片资源，将文件资源放置到`images`目录中对应的文档目录中
 >5. 将所有添加和修改的文件提交到发布目录
+
+
+### 参考资源
+0. mdoc：https://github.com/lipz89/mdocs
+1. markedjs：https://github.com/markedjs/marked
+2. highlightjs：https://highlightjs.org/
