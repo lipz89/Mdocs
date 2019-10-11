@@ -1,0 +1,98 @@
+{
+    "title": "物资云接口定义",
+    "version": "1.0.0",
+    "author": "lpz",
+    "copyright": "©2019, 快享医疗.",
+    "menus": [
+        {
+            "title": "交换标准说明",
+            "file": "docs/wzy/instruction.md"
+        },
+        {
+            "title": "耗材",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "MY003 医院耗材规格",
+                    "file": "docs/wzy/hc/my003.md"
+                },
+                {
+                    "title": "MY004 企业信息",
+                    "file": "docs/wzy/hc/my004.md"
+                },
+                {
+                    "title": "MY014 供货关系",
+                    "file": "docs/wzy/hc/my014.md"
+                },
+                {
+                    "title": "MY016 企业证件",
+                    "file": "docs/wzy/hc/my016.md"
+                },
+                {
+                    "title": "MY019 物资分类",
+                    "file": "docs/wzy/hc/my019.md"
+                },
+                {
+                    "title": "MY101 订单信息",
+                    "file": "docs/wzy/hc/my101.md"
+                },
+                {
+                    "title": "MY102 配送单信息",
+                    "file": "docs/wzy/hc/my102.md"
+                },
+                {
+                    "title": "MY104 退货单信息",
+                    "file": "docs/wzy/hc/my104.md"
+                },
+                {
+                    "title": "MY106 配送单验收",
+                    "file": "docs/hc/my106.md"
+                },
+                {
+                    "title": "MY109 发票验收",
+                    "file": "docs/wzy/hc/my109.md"
+                },
+                {
+                    "title": "MY110 平台基础规格",
+                    "file": "docs/wzy/hc/my110.md"
+                },
+                {
+                    "title": "MY114 跟台订单",
+                    "file": "docs/wzy/hc/my114.md"
+                },
+                {
+                    "title": "MY118 发票凭证",
+                    "file": "docs/wzy/hc/my118.md"
+                }
+            ]
+        },
+        {
+            "title": "药品",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "YY001 医院信息",
+                    "file": "docs/wzy/yp/yy001.md"
+                },
+                {
+                    "title": "YY002 配送点消息",
+                    "file": "docs/wzy/yp/yy002.md"
+                }
+            ]
+        },
+        {
+            "title": "附录",
+            "listtype": "decimal",
+            "items": [
+                {
+                    "title": "数据字典",
+                    "file": "docs/wzy/fl/dic.md"
+                },
+                {
+                    "title": "数据格式",
+                    "file": "docs/wzy/fl/fmt.md"
+                }
+            ]
+        }
+    ]
+}

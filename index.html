@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>MDOCS文档</title>
+    <title>物资云接口文档</title>
     <script src="scripts/marked.js"></script>
     <script src="highlight/highlight.js"></script>
     <script src="scripts/jquery1.10.2.min.js"></script>
@@ -22,19 +22,27 @@
             <div class="slidepnl"></div>
         </div>
         <div class="main">
-            <h1 class="maintitle"></h1>
+            <h1 class="maintitle">MDocApis</h1>
             <div class="maindoc"></div>
         </div>
         <div class="navmore">
             <div class="arrow">MORE</div>
             <div class="right">
                 <div class="top" title="回到顶部">顶</div>
-                <div class="source" title="查看源代码">源</div>
+                <div class="source" title="切换源码">源</div>
+            </div>
+        </div>
+        <div class="floatmenu">
+            <div class="arrow">MENU</div>
+            <div class="list">
+                <ul class='mainmemu'>
+                </ul>
             </div>
         </div>
         <div class="copyright">
-            <span></span>
+            <span>©2019, 快享医疗.</span>
             <span>
+                | <a class='mdoc' href='javascript:void(0);'>mdoc</a>
                 | <a class='mddemo' href='javascript:void(0);'>md示例</a>
                 | <a href="https://github.com/markedjs/marked">markedjs</a>
                 | <a href="https://highlightjs.org/">highlightjs</a>
@@ -44,7 +52,21 @@
 </body>
 
 <script type="text/javascript">
-    window.app.loadConfig("config.json");
+    var docs = [
+        {
+            name: "物资云接口文档",
+            config: "wzy.json"
+        },
+        {
+            name: "LiteFramework框架说明",
+            config: "fx.json"
+        },
+        {
+            name: "耗材物资云文档",
+            config: "dmsp.json"
+        }
+    ]
+    window.app.init(docs);
 </script>
 
 </html>

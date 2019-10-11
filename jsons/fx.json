@@ -1,0 +1,72 @@
+{
+    "title": "LiteFramework框架说明",
+    "version": "1.0.0",
+    "author": "lpz",
+    "copyright": "©2019, 快享医疗.",
+    "menus": [
+        {
+            "title": "简介",
+            "file": "docs/fx/instruction.md"
+        },
+        {
+            "title": "框架核心",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "框架核心简介",
+                    "file": "docs/fx/core/info.md"
+                },
+                {
+                    "title": "框架依赖",
+                    "file": "docs/fx/core/dependency.md"
+                },
+                {
+                    "title": "AppInstance",
+                    "file": "docs/fx/core/appinstance.md"
+                }
+            ]
+        },
+        {
+            "title": "服务核心",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "框架依赖",
+                    "file": "docs/fx/server/dependency.md"
+                },
+                {
+                    "title": "IService",
+                    "file": "docs/fx/server/iservice.md"
+                }
+            ]
+        },
+        {
+            "title": "插件",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "简介",
+                    "file": "docs/fx/plugins/info.md"
+                },
+                {
+                    "title": "已提供插件",
+                    "file": "docs/fx/plugins/list.md"
+                }
+            ]
+        },
+        {
+            "title": "部分核心技术实现详细说明",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "简介",
+                    "file": "docs/fx/details/info.md"
+                },
+                {
+                    "title": "已提供插件",
+                    "file": "docs/fx/details/list.md"
+                }
+            ]
+        }
+    ]
+}

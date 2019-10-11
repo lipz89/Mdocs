@@ -1,0 +1,36 @@
+{
+    "title": "耗材物资云文档",
+    "version": "1.0.0",
+    "author": "lpz",
+    "copyright": "©2019, 快享医疗.",
+    "menus": [
+        {
+            "title": "简介",
+            "file": "docs/dmsp/instruction.md"
+        },
+        {
+            "title": "系统初始化",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "webconfig参数说明",
+                    "file": "docs/dmsp/details/webconfig.md"
+                },
+                {
+                    "title": "日志配置",
+                    "file": "docs/dmsp/details/log.md"
+                }
+            ]
+        },
+        {
+            "title": "部分功能介绍",
+            "listtype": "circle",
+            "items": [
+                {
+                    "title": "登录流程",
+                    "file": "docs/dmsp/details/login.md"
+                }
+            ]
+        }
+    ]
+}

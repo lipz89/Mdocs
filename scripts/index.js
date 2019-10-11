@@ -4,7 +4,7 @@ window.app = (function () {
         for (let i = 0; i < anchors.length; i++) {
             const anchor = anchors[i];
             var li = $("<li>").addClass("a" + anchor.tag);
-            var a = $("<a href='#" + anchor.id + "'>");
+            var a = $("<a href='#" + anchor.id + "' title='" + anchor.txt + "'>");
             a.html(anchor.txt);
             li.append(a);
             ul.append(li);
@@ -21,7 +21,7 @@ window.app = (function () {
         for (let i = 0; i < menus.length; i++) {
             const menu = menus[i];
             var li = $("<li>");
-            var a = $("<a href='javascript:void(0);'>");
+            var a = $("<a href='javascript:void(0);' title='" + menu.title + "'>");
             a.html(menu.title);
             if (menu.file) {
                 a.data("source", menu.file);
@@ -59,7 +59,7 @@ window.app = (function () {
 
     function loadJs(src) {
         if ($(document.body).find("script[src='" + src + "']").length === 0) {
-            $(document.body).append("<script src='" + src + "' type='text/javascript'></script>");
+            $(document.body).append("<script src='" + src + "' type='text/javascript' async></script>");
         }
     }
 
@@ -73,6 +73,7 @@ window.app = (function () {
             $.get(source).then(function (md) {
                 var containText = md;
                 if (showmd) {
+                    md = md.replace(/\</g, "&lt;").replace(/\>/g, "&gt;")
                     containText = "<pre><code class=\"language-md hljs\">" + md + "</code></pre>";
                 } else {
                     containText = marked(md);
@@ -99,6 +100,7 @@ window.app = (function () {
     }
 
     $(document).ready(function () {
+        window.app.title = "MDocApis"
         window.app.titleEle = $(window.app.titleSelector);
         window.app.container = $(window.app.containerSelector);
         window.app.copyrightEle = $(window.app.copyrightSelector);
@@ -111,9 +113,9 @@ window.app = (function () {
             $(document).scrollTop(0);
         });
         $(document).find("div.navmore .source").click(function () {
-            var link = window.app.slider.find("a.menulink.active");
+            var link = $("a[showing]");
             if (link.length == 1) {
-                if (link.data("showsource")) {
+                if (link.attr("showing") == "source") {
                     link.trigger("click");
                 } else {
                     var url = link.data("source");
@@ -124,7 +126,7 @@ window.app = (function () {
 
                     window.app.titleEle.html(link.text() + " - 源码");
                     document.title = link.text() + " - 源码 - " + window.app.title;
-                    link.data("showsource", true);
+                    link.attr("showing", "source")
                 }
             }
         });
@@ -177,7 +179,7 @@ window.app = (function () {
 
         window.app.slider.delegate("li a.menulink", "click", function () {
             var link = $(this);
-            if (link.is(".active") && !link.data("showsource")) {
+            if (link.is(".active") && link.attr("showing") != "source") {
                 return;
             }
             var source = link.data("source");
@@ -207,236 +209,131 @@ window.app = (function () {
 
             window.app.titleEle.html(link.text());
             document.title = link.text() + " - " + window.app.title;
-            link.data("showsource", false)
+            $("a[showing]").removeAttr("showing")
+            link.attr("showing", "doc")
         })
 
-        loadLanguages('1c');
-        loadLanguages('abnf');
-        loadLanguages('accesslog');
-        loadLanguages('actionscript');
-        loadLanguages('ada');
-        loadLanguages('angelscript');
-        loadLanguages('apache');
-        loadLanguages('applescript');
-        loadLanguages('arcade');
-        loadLanguages('arduino');
-        loadLanguages('armasm');
-        loadLanguages('asciidoc');
-        loadLanguages('aspectj');
-        loadLanguages('autohotkey');
-        loadLanguages('autoit');
-        loadLanguages('avrasm');
-        loadLanguages('awk');
-        loadLanguages('axapta');
-        loadLanguages('bash');
-        loadLanguages('basic');
-        loadLanguages('bnf');
-        loadLanguages('brainfuck');
-        loadLanguages('cal');
-        loadLanguages('capnproto');
-        loadLanguages('ceylon');
-        loadLanguages('clean');
-        loadLanguages('clojure-repl');
-        loadLanguages('clojure');
-        loadLanguages('cmake');
-        loadLanguages('coffeescript');
-        loadLanguages('coq');
-        loadLanguages('cos');
-        loadLanguages('cpp');
-        loadLanguages('crmsh');
-        loadLanguages('crystal');
-        loadLanguages('cs');
-        loadLanguages('csp');
-        loadLanguages('css');
-        loadLanguages('d');
-        loadLanguages('dart');
-        loadLanguages('delphi');
-        loadLanguages('diff');
-        loadLanguages('django');
-        loadLanguages('dns');
-        loadLanguages('dockerfile');
-        loadLanguages('dos');
-        loadLanguages('dsconfig');
-        loadLanguages('dts');
-        loadLanguages('dust');
-        loadLanguages('ebnf');
-        loadLanguages('elixir');
-        loadLanguages('elm');
-        loadLanguages('erb');
-        loadLanguages('erlang-repl');
-        loadLanguages('erlang');
-        loadLanguages('excel');
-        loadLanguages('fix');
-        loadLanguages('flix');
-        loadLanguages('fortran');
-        loadLanguages('fsharp');
-        loadLanguages('gams');
-        loadLanguages('gauss');
-        loadLanguages('gcode');
-        loadLanguages('gherkin');
-        loadLanguages('glsl');
-        loadLanguages('gml');
-        loadLanguages('go');
-        loadLanguages('golo');
-        loadLanguages('gradle');
-        loadLanguages('groovy');
-        loadLanguages('haml');
-        loadLanguages('handlebars');
-        loadLanguages('haskell');
-        loadLanguages('haxe');
-        loadLanguages('hsp');
-        loadLanguages('htmlbars');
-        loadLanguages('http');
-        loadLanguages('hy');
-        loadLanguages('inform7');
-        loadLanguages('ini');
-        loadLanguages('irpf90');
-        loadLanguages('isbl');
-        loadLanguages('java');
-        loadLanguages('javascript');
-        loadLanguages('jboss-cli');
-        loadLanguages('json');
-        loadLanguages('julia-repl');
-        loadLanguages('julia');
-        loadLanguages('kotlin');
-        loadLanguages('lasso');
-        loadLanguages('ldif');
-        loadLanguages('leaf');
-        loadLanguages('less');
-        loadLanguages('lisp');
-        loadLanguages('livecodeserver');
-        loadLanguages('livescript');
-        loadLanguages('llvm');
-        loadLanguages('lsl');
-        loadLanguages('lua');
-        loadLanguages('makefile');
-        loadLanguages('markdown');
-        loadLanguages('mathematica');
-        loadLanguages('matlab');
-        loadLanguages('maxima');
-        loadLanguages('mel');
-        loadLanguages('mercury');
-        loadLanguages('mipsasm');
-        loadLanguages('mizar');
-        loadLanguages('mojolicious');
-        loadLanguages('monkey');
-        loadLanguages('moonscript');
-        loadLanguages('n1ql');
-        loadLanguages('nginx');
-        loadLanguages('nimrod');
-        loadLanguages('nix');
-        loadLanguages('nsis');
-        loadLanguages('objectivec');
-        loadLanguages('ocaml');
-        loadLanguages('openscad');
-        loadLanguages('oxygene');
-        loadLanguages('parser3');
-        loadLanguages('perl');
-        loadLanguages('pf');
-        loadLanguages('pgsql');
-        loadLanguages('php');
-        loadLanguages('plaintext');
-        loadLanguages('pony');
-        loadLanguages('powershell');
-        loadLanguages('processing');
-        loadLanguages('profile');
-        loadLanguages('prolog');
-        loadLanguages('properties');
-        loadLanguages('protobuf');
-        loadLanguages('puppet');
-        loadLanguages('purebasic');
-        loadLanguages('python');
-        loadLanguages('q');
-        loadLanguages('qml');
-        loadLanguages('r');
-        loadLanguages('reasonml');
-        loadLanguages('rib');
-        loadLanguages('roboconf');
-        loadLanguages('routeros');
-        loadLanguages('rsl');
-        loadLanguages('ruby');
-        loadLanguages('ruleslanguage');
-        loadLanguages('rust');
-        loadLanguages('sas');
-        loadLanguages('scala');
-        loadLanguages('scheme');
-        loadLanguages('scilab');
-        loadLanguages('scss');
-        loadLanguages('shell');
-        loadLanguages('smali');
-        loadLanguages('smalltalk');
-        loadLanguages('sml');
-        loadLanguages('sqf');
-        loadLanguages('sql');
-        loadLanguages('stan');
-        loadLanguages('stata');
-        loadLanguages('step21');
-        loadLanguages('stylus');
-        loadLanguages('subunit');
-        loadLanguages('swift');
-        loadLanguages('taggerscript');
-        loadLanguages('tap');
-        loadLanguages('tcl');
-        loadLanguages('tex');
-        loadLanguages('thrift');
-        loadLanguages('tp');
-        loadLanguages('twig');
-        loadLanguages('typescript');
-        loadLanguages('vala');
-        loadLanguages('vbnet');
-        loadLanguages('vbscript-html');
-        loadLanguages('vbscript');
-        loadLanguages('verilog');
-        loadLanguages('vhdl');
-        loadLanguages('vim');
-        loadLanguages('x86asm');
-        loadLanguages('xl');
-        loadLanguages('xml');
-        loadLanguages('xquery');
-        loadLanguages('yaml');
-        loadLanguages('zephir');
+        function loadHighLanguages() {
+            var array = ['1c',
+                'abnf', 'accesslog', 'actionscript', 'ada', 'angelscript', 'apache',
+                'applescript', 'arcade', 'arduino', 'armasm', 'asciidoc', 'aspectj',
+                'autohotkey', 'autoit', 'avrasm', 'awk', 'axapta',
+                'bash', 'basic', 'bnf', 'brainfuck',
+                'cal', 'capnproto', 'ceylon', 'clean', 'clojure-repl', 'clojure',
+                'cmake', 'coffeescript', 'coq', 'cos', 'cpp', 'crmsh', 'crystal', 'cs', 'csp', 'css',
+                'd', 'dart', 'delphi', 'diff', 'django', 'dns', 'dockerfile', 'dos', 'dsconfig', 'dts', 'dust',
+                'ebnf', 'elixir', 'elm', 'erb', 'erlang-repl', 'erlang', 'excel',
+                'fix', 'flix', 'fortran', 'fsharp',
+                'gams', 'gauss', 'gcode', 'gherkin', 'glsl', 'gml', 'go', 'golo', 'gradle', 'groovy',
+                'haml', 'handlebars', 'haskell', 'haxe', 'hsp', 'htmlbars', 'http', 'hy',
+                'inform7', 'ini', 'irpf90', 'isbl',
+                'java', 'javascript', 'jboss-cli', 'json', 'julia-repl', 'julia',
+                'kotlin',
+                'lasso', 'ldif', 'leaf', 'less', 'lisp', 'livecodeserver', 'livescript', 'llvm', 'lsl', 'lua',
+                'makefile', 'markdown', 'mathematica', 'matlab', 'maxima', 'mel',
+                'mercury', 'mipsasm', 'mizar', 'mojolicious', 'monkey', 'moonscript',
+                'n1ql', 'nginx', 'nimrod', 'nix', 'nsis',
+                'objectivec', 'ocaml', 'openscad', 'oxygene',
+                'parser3', 'perl', 'pf', 'pgsql', 'php', 'plaintext', 'pony', 'powershell', 'processing',
+                'profile', 'prolog', 'properties', 'protobuf', 'puppet', 'purebasic', 'python',
+                'q', 'qml',
+                'r', 'reasonml', 'rib', 'roboconf', 'routeros', 'rsl', 'ruby', 'ruleslanguage', 'rust',
+                'sas', 'scala', 'scheme', 'scilab', 'scss', 'shell', 'smali', 'smalltalk',
+                'sml', 'sqf', 'sql', 'stan', 'stata', 'step21', 'stylus', 'subunit', 'swift',
+                'taggerscript', 'tap', 'tcl', 'tex', 'thrift', 'tp', 'twig', 'typescript',
+                'vala', 'vbnet', 'vbscript-html', 'vbscript', 'verilog', 'vhdl', 'vim',
+                'x86asm', 'xl', 'xml', 'xquery',
+                'yaml',
+                'zephir']
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                loadLanguages(element);
+            }
+        }
+
+        loadHighLanguages();
+
+        window.app.copyrightEle.find("a.mddemo").click(function () {
+            loadmd("docs/mddemo.md");
+            $("a[showing]").removeAttr("showing")
+            $(this).data("source", "docs/mddemo.md").attr("showing", "doc")
+            title = $(this).text()
+
+            window.app.slider.find("li>a.active").closest("li").find(">ul").remove();
+            window.app.slider.find("li>a.active").closest("li").find(">span.toggle").remove();
+            window.app.slider.find("li>a.active").removeClass("active");
+            document.title = title + " - " + window.app.title;
+            window.app.titleEle.html(title);
+        });
+
+        window.app.copyrightEle.find("a.mdoc").click(function () {
+            loadmd("docs/mdoc.md");
+            $("a[showing]").removeAttr("showing")
+            $(this).data("source", "docs/mdoc.md").attr("showing", 0)
+            title = $(this).text()
+
+            window.app.slider.find("li>a.active").closest("li").find(">ul").remove();
+            window.app.slider.find("li>a.active").closest("li").find(">span.toggle").remove();
+            window.app.slider.find("li>a.active").removeClass("active");
+            document.title = title + " - " + window.app.title;
+            window.app.titleEle.html(title);
+        });
     })
 
+    function loadConfig(url) {
+        $.get(url).then(function (data) {
+            if (data.title) {
+                document.title = data.title;
+                window.app.title = data.title;
+                window.app.titleEle.html(data.title);
+            }
+            if (window.app.copyrightEle.length) {
+                window.app.copyrightEle.find(">span:eq(0)").html(data.copyright + " | by " + data.author + ". | V" + data.version);
+            }
+
+            if (data.menus && data.menus.length) {
+                window.app.slider.empty();
+                setMenus(window.app.slider, data.menus, null, false);
+                window.app.container.html("<pre>请从左侧目录选择要查看的接口说明。</pre>");
+                var first = window.app.slider.find("li>a.menulink:eq(0)");
+                first.closest("ul.toggle").closest("li.toggle").find(">span.toggle").click();
+                first.length && first.trigger("click");
+            } else {
+                window.app.slider.append("未定义目录");
+                window.app.container.html("<pre>未定义目录配置。</pre>");
+            }
+        }, function (e) {
+            window.app.container.html(e.responseText);
+        })
+    }
+
+
     return {
-        slideSelector: ".document>.slidebar>.slidepnl",
+        slideSelector: ".slidebar>.slidepnl",
         titleSelector: ".document>.main .maintitle",
         containerSelector: ".document>.main .maindoc",
-        copyrightSelector: ".document>.copyright",
+        copyrightSelector: ".copyright",
 
-        loadConfig: function (url) {
-            $.get(url).then(function (data) {
-                if (data.title) {
-                    document.title = data.title;
-                    window.app.title = data.title;
-                    window.app.titleEle.html(data.title);
-                }
-                if (window.app.copyrightEle.length) {
-                    window.app.copyrightEle.find(">span:eq(0)").html(data.copyright + " | by " + data.author + ". | V" + data.version);
-                }
-
-                window.app.copyrightEle.find("a.mddemo").click(function () {
-                    loadmd("docs/mddemo.md");
-
-                    window.app.slider.find("li>a.active").closest("li").find(">ul").remove();
-                    window.app.slider.find("li>a.active").closest("li").find(">span.toggle").remove();
-                    window.app.slider.find("li>a.active").removeClass("active");
-                    document.title = "MD文档示例 - " + window.app.title
-                });
-
-                if (data.menus && data.menus.length) {
-                    window.app.slider.empty();
-                    setMenus(window.app.slider, data.menus, null, false);
-                    window.app.container.html("<pre>请从左侧目录选择要查看的接口说明。</pre>");
-                    var first = window.app.slider.find("li>a.menulink:eq(0)");
-                    first.closest("ul.toggle").closest("li.toggle").find(">span.toggle").click();
-                    first.length && first.trigger("click");
-                } else {
-                    window.app.slider.append("未定义目录");
-                    window.app.container.html("<pre>未定义目录配置。</pre>");
-                }
-            }, function (e) {
-                window.app.container.html(e.responseText);
-            })
+        init: function (docs) {
+            var doctop = $("div.document>.floatmenu>div.list>ul");
+            for (let index = 0; index < docs.length; index++) {
+                const element = docs[index];
+                var pdf = element.config.replace(".json", ".pdf")
+                var a = $("<a href='javascript:void(0);'>").data("config", element.config).text(element.name);
+                var dn = $("<a class='pdfdn' target='_blank' title='下载 " + element.name + "' href='/merge/" + pdf + "'>").text("⇩");
+                var li = $("<li>").append(a).append(dn);
+                doctop.append(li);
+                a.click(jump);
+            }
+            var ulhtml = doctop.clone(true);
+            $("div.document>.main>div.maindoc").append("<div style='font-size:20px;'>请选择要查看的API:</div>").append(ulhtml);
+            function jump(e) {
+                var link = $(this);
+                var config = "jsons/" + link.data("config");
+                loadConfig(config);
+                $(".document>.slidebar").show();
+                return false;
+            }
         }
     }
 })();

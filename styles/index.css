@@ -2,18 +2,71 @@ div.document {
     font-family: 'goudy old style', 'minion pro', 'bell mt', Georgia, 'Hiragino Mincho Pro', serif;
     font-size: 17px;
     width: 1000px;
-    margin: 30px auto 0 auto;
+    margin: 0 auto;
     color: #3E4349;
 }
+div.maindoc ul.mainmemu{
+    font-size: 20px;
+    margin: 10;
+}
 
+div.floatmenu {
+    display: block;
+    position: fixed;
+    cursor: pointer;
+    top: 100px;
+    right: 0px;
+    background: transparent;
+    color: #0464c4;
+}
+
+div.floatmenu div.list {
+    float: right;
+    display: none;
+    line-height: 35px;
+    font-size: 18px;    
+    background: honeydew;
+    border: 1px double #999;
+}
+
+div.floatmenu:hover div.list {
+    display: block;
+}
+
+div.floatmenu .arrow {
+    float: left;
+    height: 57px;
+    width: 12px;
+    word-break: break-all;
+    line-height: 15px;
+    font-size: 12px;
+    text-align: center;
+    border: 3px double #999;
+    background: greenyellow;
+}
+
+ul.mainmemu {
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+    font-size: 14px;
+}
+
+ul.mainmemu  a.pdfdn{
+    padding-left: 5px;
+    color: #04f;
+}
 div.slidebar {
     width: 25%;
     position: fixed;
-    left: 10px;
+    left: 10px;    
+    top: 32px;
+    display: none;
 }
 
 div.slidebar .slidepnl {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 div.slidebar .slidepnl::-webkit-scrollbar {
@@ -79,7 +132,9 @@ div.slidebar ul li span.toggle {
 div.slidebar a {
     color: #444;
     text-decoration: none;
-    border-bottom: 1px dotted #999;
+    border-bottom: 1px dotted #999;    
+    white-space: nowrap;
+    overflow-x: hidden;
 }
 
 div.slidebar li.aH2 {
@@ -100,15 +155,19 @@ div.slidebar li.aH4 {
 div.main {
     width: 75%;
     margin-left: 25%;
+    padding: 0 5px 32px 5px;
 }
 
 div.copyright {
-    clear: both;
-    margin: 20px auto 20px auto;
-    padding-top: 10px;
+    margin: 10px auto 0 auto;
+    padding: 10px 0;
     font-size: 14px;
-    color: #888;
+    color: #888;    
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 1000px;
+    background: #fff;
 }
 
 .table {
@@ -131,7 +190,8 @@ div.navmore div.right {
     display: none;
     line-height: 35px;
     text-align: center;
-    font-size: 18px;
+    font-size: 18px;    
+    background: honeydew;
     border: 1px double #999;
 }
 
