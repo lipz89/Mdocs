@@ -121,10 +121,10 @@
 ![目录效果](/images/oths/menus.png)
 
 #### 目录定义说明
->title - 目录显示文本
-file - 目录对应文档，只有目录的叶子节点可指定此项
-items - 子目录 
-listtype - 子目录列表样式，限定UL标签的list-style-type样式枚举值
+>- title - 目录显示文本
+>- file - 目录对应文档，只有目录的叶子节点可指定此项
+>- items - 子目录 
+>- listtype - 子目录列表样式，限定UL标签的list-style-type样式枚举值
 ### 图片引用
 ![图片引用](/images/oths/img1.png)
 ![图片引用2](/images/oths/img2.png)
